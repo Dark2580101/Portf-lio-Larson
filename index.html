@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Larson H. Sithoy</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #1e90ff;
+            padding-bottom: 20px;
+        }
+
+        .photo img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #1e90ff;
+            margin-right: 20px;
+        }
+
+        .info-pessoal {
+            flex: 1;
+        }
+
+        .info-pessoal h1 {
+            font-size: 3.5em;
+            color: #1e90ff;
+            margin: 0;
+        }
+
+        .info-pessoal p {
+            font-size: 1.5em;
+            margin: 5px 0;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            cursor: pointer;
+            border-bottom: 2px solid #3742fa;
+        }
+
+        .tab {
+            flex-grow: 1;
+            text-align: center;
+            padding: 15px 25px;
+            background-color: #1e90ff;
+            color: #ffffff;
+            border-radius: 25px 25px 0 0;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-right: 5px;
+            font-size: 1.2em;
+        }
+
+        .tab:last-child {
+            margin-right: 0;
+        }
+
+        .tab:hover, .tab-active {
+            background-color: #3742fa;
+            transform: translateY(-5px);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            background-color: #1e1e1e;
+            border-radius: 0 0 15px 15px;
+            margin-top: -5px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content-active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2.8em;
+            color: #1e90ff;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3742fa;
+            padding-bottom: 10px;
+        }
+
+        .sobre-mim p, .projetos p, .habilidades .skill, .contato p {
+            color: #dddddd;
+            font-size: 1.3em;
+            line-height: 1.8;
+        }
+
+        .habilidades .skill {
+            background-color: #2a2a2a;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-size: 1.2em;
+        }
+
+        .projetos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 30px;
+        }
+
+        .projeto img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .projeto img:hover {
+            transform: scale(1.05);
+        }
+
+        .projeto { 
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .social-media a {
+            margin: 0 20px;
+            font-size: 2em;
+            color: #1e90ff;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out, transform 0.3s ease;
+        }
+
+        .social-media a img {
+            width: 50px;
+            height: 50px;
+            vertical-align: middle;
+            transition: transform 0.3s ease;
+        }
+
+        .social-media a:hover {
+            color: #3742fa;
+        }
+
+        .social-media a:hover img {
+            transform: scale(1.2);
+        }
+
+        .background-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .background-circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(30, 144, 255, 0.1);
+            animation: move 20s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            30% {
+                transform: translateY(-80px) translateX(80px);
+            }
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+        }
+
+        /* Footer styling */
+        .footer {
+            background-color: #1e1e1e;
+            color: #dddddd;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .footer-section h2 {
+            color: #1e90ff;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .footer-section p {
+            font-size: 1.2em;
+        }
+
+        .footer-section .social-media {
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-section .social-media a {
+            margin: 0 15px;
+            color: #1e90ff;
+        }
+
+        .footer-section .social-media a img {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-section .social-media a:hover img {
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            border-top: 1px solid #3742fa;
+            padding-top: 10px;
+        }
+
+    </style>
+    <script>
+        function showTab(tabId) {
+            var tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(function(tab) {
+                tab.classList.remove('tab-content-active');
+            });
+
+            var activeTab = document.getElementById(tabId);
+            activeTab.classList.add('tab-content-active');
+
+            var tabButtons = document.querySelectorAll('.tab');
+            tabButtons.forEach(function(button) {
+                button.classList.remove('tab-active');
+            });
+
+            var activeButton = document.querySelector(`[onclick="showTab('${tabId}')"]`);
+            activeButton.classList.add('tab-active');
+        }
+
+        window.onload = function() {
+            showTab('sobre-mim');
+        };
+    </script>
+</head>
+<body>
+
+    <div class="background-effect">
+        <div class="background-circle" style="width: 300px; height: 300px; top: 15%; left: 10%;"></div>
+        <div class="background-circle" style="width: 400px; height: 400px; top: 50%; left: 70%;"></div>
+        <div class="background-circle" style="width: 250px; height: 250px; top: 75%; left: 25%;"></div>
+    </div>
+
+    <div class="container">
+        <!-- Seção Header -->
+        <div class="header">
+            <div class="photo">
+                <img src="Larson.jpg" alt="Foto de Larson H. Sithoy">
+            </div>
+            <div class="info-pessoal">
+                <h1>Larson H. Sithoy</h1>
+                <p>Email: sithoylarson9@gmail.com</p>
+                <p>Telefone: (+258) 83 307 7022</p>
+                <p>Endereço: Av. Nelson Mandela, 5910, Cidade de Maputo</p>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <div class="tab tab-active" onclick="showTab('sobre-mim')">Sobre Mim</div>
+            <div class="tab" onclick="showTab('habilidades')">Habilidades</div>
+            <div class="tab" onclick="showTab('formacao')">Formação</div>
+            <div class="tab" onclick="showTab('projetos')">Projetos</div>
+        </div>
+        
+
+        <div id="sobre-mim" class="tab-content tab-content-active">
+            <h2 class="section-title">Sobre Mim</h2>
+            <p>Olá! Sou Larson H. Sithoy, estudante de Suporte Informático no Instituto de Transportes e Comunicações (ITC), em Maputo. Tenho uma paixão por tecnologia e estou sempre buscando maneiras de aprimorar minhas habilidades e conhecimentos na área de TI.</p>
+            <p>Possuo ampla experiência em manutenção de hardware, configuração de redes e sistemas operacionais, e suporte técnico tanto remoto quanto presencial. Acredito que o aprendizado contínuo é a chave para o sucesso, por isso estou sempre me atualizando sobre novas tecnologias e tendências no setor de TI.</p>
+            <p>Além do meu foco em Suporte Informático, tenho conhecimentos básicos em programação, que utilizo para automatizar tarefas e desenvolver pequenas aplicações web, como o website pessoal que você está visitando.</p>
+            <p><b>Interesses:</b> Estou profundamente interessado em áreas como a Internet das Coisas (IoT), Inteligência Artificial (IA) e Segurança da Informação. Acredito que a convergência dessas tecnologias será crucial para o futuro da computação e da sociedade.</p>
+            <p><b>Objetivos Profissionais:</b> Meu objetivo é me especializar em redes e segurança, e futuramente atuar em projetos de grande escala que envolvam o desenvolvimento de sistemas de infraestrutura de TI robustos e seguros. Almejo trabalhar com equipes multidisciplinares e contribuir para o avanço tecnológico de empresas e comunidades.</p>
+            <p>Sou uma pessoa proativa e colaborativa, sempre em busca de novas maneiras de melhorar a eficiência no ambiente de trabalho e de aplicar soluções inovadoras para desafios técnicos. Estou aberto a oportunidades de crescimento profissional e a colaborar com pessoas que compartilham do mesmo entusiasmo pela tecnologia.</p>
+        </div>
+
+        <div id="formacao" class="tab-content">
+            <h3 class="section-title">Formação</h3>
+            <p><b>Instituto de Transportes e Comunicações (ITC)</b><br>- Curso: Suporte Informático<br>- Ano: 2º Ano<br>- Período: 2023 - Atual<br><b>Descrição:</b><br>- Foco em manutenção de hardware;<br>- Configuração de redes;<br>- Suporte técnico;<br>- Administração de sistemas operacionais.</p>            
+        </div>
+        
+        <div id="habilidades" class="tab-content">
+            <h2 class="section-title">Habilidades Técnicas</h2>
+            <p>- Manutenção de hardware e software: Diagnóstico e reparo de problemas em computadores e dispositivos móveis, atualização e substituição de componentes de hardware.</p>
+            <p>- Instalação e configuração de sistemas operacionais: Experiência em instalação e configuração de Windows, Linux e outros sistemas operacionais, bem como a configuração de drivers e softwares necessários.</p>
+            <p>- Suporte técnico remoto e presencial: Atendimento a usuários para resolução de problemas técnicos através de suporte remoto e visitas presenciais, com habilidade em comunicação clara e eficaz.</p>
+            <p>- Administração de redes: Configuração e gerenciamento de redes locais (LAN), configuração de roteadores e switches, e monitoramento de desempenho de rede.</p>
+            <p>- Programação básica: Conhecimento em linguagens de programação como Python, HTML/CSS e JavaScript, útil para automação de tarefas e desenvolvimento de pequenas aplicações.</p>
+        </div>
+
+        <div id="projetos" class="tab-content">
+            <h2 class="section-title">Projetos</h2>
+            <p>Aqui estão alguns dos meus projetos recentes:</p>
+            <div class="projetos-container">
+                <div class="projeto">
+                    <h3>Projeto 1: Carro Inteligente</h3>
+                    <img src="1 projeto.jpg" alt="Projeto 1">
+                    <p>Descrição: Um carro inteligente é um veículo equipado com tecnologia avançada que permite uma condução mais segura e eficiente.</p>
+                </div>
+                <div class="projeto">
+                    <h3>Projeto 2: Bússola Eletrônica</h3>
+                    <img src="2 projeto.jpg" alt="Projeto 2 - Aplicativo de Monitoramento de Rede">
+                    <p>Descrição: Uma Bússola Eletrônica é um dispositivo digital que utiliza sensores magnéticos para determinar e exibir a direção em que está apontada.</p>
+                </div>
+                <div class="projeto">
+                    <h3>Projeto 3: Website Pessoal</h3>
+                    <img src="3 Projeto.png" alt="Projeto 3 - Website Pessoal">
+                    <p>Descrição: Website desenvolvido em HTML, CSS e JavaScript para exibir meu portfólio e habilidades.</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="Redes sociais" class="tab-content">
+            <h2 class="section-title">Redes sociais</h2>
+            <div class="social-media">
+                <a href="https://www.instagram.com/larson_sithoy" target="_blank" title="Instagram">
+                    <img src="instagram-icon.png" alt="Instagram">
+                </a>
+                <a href="https://www.youtube.com/@the_last_sithoy_" target="_blank" title="YouTube">
+                    <img src="youtube-icon.png" alt="YouTube">
+                </a>
+                <a href="https://wa.me/258846060094" target="_blank" title="WhatsApp">
+                    <img src="whatsapp-icon.png" alt="WhatsApp">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h2>Sobre Mim</h2>
+                <p>Sou Larson H. Sithoy, estudante de Suporte Informático com paixão por tecnologia e inovação. Sempre em busca de novos desafios no mundo da TI.</p>
+            </div>
+            <div class="footer-section contact">
+                <h2>Contatos</h2>
+                <p>Email: <a href="mailto:sithoylarson9@gmail.com">sithoylarson9@gmail.com</a></p>
+                <p>Telefone: <a href="tel:+258833077022">(+258) 83 307 7022</a></p>
+                <p>Endereço: Av. Nelson Mandela, 5910, Cidade de Maputo</p>
+            </div>
+            <div class="footer-section social">
+                <h2>Redes Sociais</h2>
+                <div class="social-media">
+                    <a href="https://www.instagram.com/larson_sithoy/" target="_blank" title="Instagram">
+                        <img src="instagram-icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://www.youtube.com/@the_last_sithoy_" target="_blank" title="YouTube">
+                        <img src="youtube-icon.png" alt="YouTube">
+                    </a>
+                    <a href="https://wa.me/258846060094" target="_blank" title="WhatsApp">
+                        <img src="whatsapp-icon.png" alt="WhatsApp">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Larson H. Sithoy</p>
+        </div>
+    </footer>
+
+</body>
+</html>
